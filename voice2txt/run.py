@@ -10,7 +10,8 @@ transcribe = Transcription('wav2text')
 
 
 def main(path) : 
-    print(pathlib.Path(path).suffix)
+    file,sr = librosa.load(path, sr=16000)
+    sf.write(path, file, 16000, subtype='PCM_16')
     if(pathlib.Path(path).suffix==".mp4") :
         path = read_create_wav(path)
     res = transcribe(path)
@@ -25,4 +26,7 @@ def read_create_wav(path):
     return "input.wav"
 
 if __name__ == "__main__":
-    main("download.wav")
+    t1 = time.time()
+    res = main("audio.wav")
+    t2 = time.time()
+    print(res, t2-t1)
