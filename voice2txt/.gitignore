@@ -1,0 +1,4 @@
+.venv
+
+wav2text/flax_model.msgpack
+wav2text/pytorch_model.bin
