@@ -11,7 +11,7 @@ import {
   import React, {useState, useEffect} from 'react';
   import Audio from "../Audio"
   import axios from 'axios'
-
+import URL from '../../BASE_URL';
   function Request() {
     const [generic, setGeneric] = useState("");
     const [fname, setFname] = useState("");
@@ -26,8 +26,9 @@ import {
 
     useEffect(() => {
       const loadMedicines = async () => {
-        const response = await axios.get('');
-        setMedicines(response.data);
+        const response = await axios.get("api/v1/genric");
+        console.log(response);
+        setMedicines(response.GenricName);
       }
       loadMedicines();
     }, [])
