@@ -42,18 +42,40 @@ import URL from '../../BASE_URL';
       if(code.length > 0){
         matches = medicines.filter(med => {
           const regex = new RegExp(`${code}`, "gi");
-          return med.rxnorm.match(regex);
+          return med.match(regex);
         })
-        console.log(code, matches);
+        // console.log(code, matches);
       }
       setSuggestions(matches)
       setRxnorm(code)
     }
     
-    const handleSubmit = async (e) => {
-      const response = await axios.post("api/v1/getdetails");
-      setFrequency(response.Frequency);
-      e.preventDefault()
+    const handleSubmit = async (name) => {
+      const response = await axios.post("api/v1/getdetails",{ 
+        name :name ,
+         weight : 50,
+          age : 40,
+
+      });
+      console.log(response.data)
+      setFrequency(response.data.details.frequency);
+      setAddinfo(response.data.details.Additional);
+      if(parseInt(response.data.dosage) > 100){
+        var num = parseInt(parseInt(response.data.dosage)/100);
+        num = num*100;
+        setDosage(num + " " + response.data.details.unit)
+      }
+      else{
+        var num = parseInt(parseInt(response.data.dosage)/10);
+        num = num*10;
+        setDosage(num + " " + response.data.details.unit)
+      }
+      // setDosage((parseInt(response.data.dosage)) + response.data.details.unit);
+      setBrand("Cipla");
+      setFname(response.data.details.FullName)
+      setGeneric(name);
+      setRoute(response.data.details.route);
+ 
     }
     return (
       <Container minH={'95vh'} maxW="container.lg" paddingY="8">
@@ -77,11 +99,13 @@ import URL from '../../BASE_URL';
                 focusBorderColor="#16a085"
               />
               {suggestions && suggestions.map((suggestion, i) => {
+                console.log(suggestions)
                 return <div key={i} className="suggestions" onClick={e => {
-                  setRxnorm(e.target.value);
+                  setRxnorm(suggestion);
+                  handleSubmit(suggestion);
                   setSuggestions([]);
                 }}>
-                {suggestion.rxnorm}
+                {suggestion}
                 </div>
               })}
             </FormControl>

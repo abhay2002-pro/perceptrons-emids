@@ -5,7 +5,9 @@ import Generic from "../models/genric.js";
 const ADULT_DOSE = 500;
 export const GetDetailsController = catchAsyncError(async (req, res, next) => {
     try {
+        console.log("here");
         const { name, weight, age } = req.body;
+        console.log(name, weight, age);
         if(name && weight && age){
         Medicine.findOne({Genric: name}, function (err, Medi){
             if(Medi) {
