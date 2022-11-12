@@ -1,0 +1,30 @@
+Create a Virtual Env using the following comands
+
+For Windows
+py -m venv .venv
+
+For mac or Linux
+python3 -m venv .venv
+
+Activate the vertual envirement using the following commands
+
+Windows : 
+.\.venv\Scripts\activate
+
+Mac / Linux : 
+source .venv/bin/activate
+
+Install the required packages using comand
+
+pip install -r requirements.txt
+
+Now the Audio to text Model is ready to use.
+
+Add your audio file to the folder and specify the name of the file at line 28 of run.py or specify the exact path to the file with respect to current directory.
+
+Run the run.py file using comands:
+Windows : 
+py run.py
+
+Mac / Linux : 
+python3 run.py
