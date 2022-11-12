@@ -14,7 +14,7 @@ export const createMedication = catchAsyncError(async (req, res, next) => {
                 route: route,
                 dosage: dosage
             })
-            Generic.create({ Genric: generic })
+            Generic.create({ RxNORM: rxnorm,Genric: generic })
             res.status.json({ message: "Medicine added Successfully !" })
         }
         else res.status(400).json({ message: "Please fill all details" })
