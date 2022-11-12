@@ -4,7 +4,7 @@ const Medicine = require("../models/medicine");
 const Generic = require("../models/genric");
 export const createMedication = catchAsyncError(async (req, res, next) => {
     try {
-        const { rxnorm, generic, name, brand, route, dosage } = req.body;
+        const { rxnorm, generic, name, brand, route, dosage, frequency, additional } = req.body;
         if (rxnorm && generic && brand) {
             Medicine.create({
                 RxNORM: rxnorm,
@@ -12,7 +12,9 @@ export const createMedication = catchAsyncError(async (req, res, next) => {
                 FullName: name,
                 BrandName: brand,
                 route: route,
-                dosage: dosage
+                dosage: dosage,
+                frequency : frequency,
+                Additional : additional
             })
             Generic.create({ RxNORM: rxnorm,Genric: generic })
             res.status.json({ message: "Medicine added Successfully !" })
