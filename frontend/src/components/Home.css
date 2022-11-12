@@ -3,4 +3,12 @@
     padding: 5rem;
     box-sizing: border-box;
   }
-  
+.suggestions{
+  cursor: pointer;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.suggestions:hover{
+  color:#16a085;
+}

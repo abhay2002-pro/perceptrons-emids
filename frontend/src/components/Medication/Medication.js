@@ -8,26 +8,51 @@ import {
     Input,
     VStack,
   } from '@chakra-ui/react';
-  import React, {useState} from 'react';
+  import React, {useState, useEffect} from 'react';
   import Audio from "../Audio"
+  import axios from 'axios'
 
   function Request() {
     const [generic, setGeneric] = useState("");
+    const [fname, setFname] = useState("");
     const [rxnorm, setRxnorm] = useState("");
     const [brand, setBrand] = useState("");
     const [dosage, setDosage] = useState("");
     const [route, setRoute] = useState("");
     const [frequency, setFrequency] = useState("");
     const [addinfo, setAddinfo] = useState("");
+    const [medicines, setMedicines] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
+
+    useEffect(() => {
+      const loadMedicines = async () => {
+        const response = await axios.get('');
+        setMedicines(response.data);
+      }
+      loadMedicines();
+    }, [])
+
+    const rxnormOnChangeHandler = (code) => {
+      let matches = []
+      if(code.length > 0){
+        matches = medicines.filter(med => {
+          const regex = new RegExp(`${code}`, "gi");
+          return med.rxnorm.match(regex);
+        })
+      }
+      setSuggestions(matches)
+      setRxnorm(code)
+    }
+    
     const handleSubmit = (e) => {
       e.preventDefault()
     }
     return (
       <Container minH={'95vh'} maxW="container.lg" paddingY="8">
         <VStack h="full" justifyContent="center" spacing="16">
-          <Heading children="Add New Prescription" m={'8'} />
+          <Heading children="Add New Prescription" m={'2'} />
           <form style={{ width: '100%' }} onSubmit={handleSubmit}>
-            <FormControl my="4">
+            <FormControl my="1">
               <FormLabel htmlFor="rxnorm">
               RxNorm Code
               <Audio setData={setRxnorm}/>
@@ -37,12 +62,18 @@ import {
                 placeholder="parac"
                 type="text"
                 value={rxnorm}
-                onChange={(e)=>{
-                  setRxnorm(e.target.value)
-                }}
+                onChange={e => rxnormOnChangeHandler(e.target.value)}
                 focusBorderColor="#16a085"
               />
-              <FormErrorMessage>RxNorm code is required.</FormErrorMessage>
+              {suggestions && suggestions.map((suggestion, i) => {
+                return 
+                <div key={i} className="suggestions" onClick={e => {
+                  setRxnorm(e.target.value);
+                  setSuggestions([]);
+                }}>
+                {suggestion.rxnorm}
+                </div>
+              })}
             </FormControl>
             <FormControl my="4">
               <FormLabel htmlFor="generic">
@@ -56,6 +87,23 @@ import {
                 value={generic}
                 onChange={(e)=>{
                   setGeneric(e.target.value)
+                }}
+                focusBorderColor="#16a085"
+              />
+              <FormErrorMessage>Generic name is required.</FormErrorMessage>
+            </FormControl>
+            <FormControl my="4">
+              <FormLabel htmlFor="fname">
+              Full Name
+              <Audio setData={setFname}/>
+              </FormLabel>
+              <Input
+                id="fname"
+                placeholder="paracetamol"
+                type="text"
+                value={fname}
+                onChange={(e)=>{
+                  setFname(e.target.value)
                 }}
                 focusBorderColor="#16a085"
               />
@@ -96,7 +144,7 @@ import {
               <FormLabel htmlFor="route" children="Route" />
               <Input
                 id="route"
-                placeholder="1010"
+                placeholder="Oral"
                 type="text"
                 value={route}
                 onChange={(e)=>{
@@ -136,7 +184,7 @@ import {
               />
             </FormControl>
             <Button my="4" style={{ color: '#16a085' }} type="submit">
-              Add 
+              Add Prescription
             </Button>
           </form>
         </VStack>
