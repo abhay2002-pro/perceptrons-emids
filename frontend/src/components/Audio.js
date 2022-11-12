@@ -1,7 +1,8 @@
 import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import {MdMic, MdMicOff} from "react-icons/md";
 
-const Audio = () => {
+const Audio = ({setData}) => {
   const {
     transcript,
     listening,
@@ -14,13 +15,14 @@ const Audio = () => {
   }
 
   return (
-    <div style={{marginLeft: "150px"}}>
-      <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button onClick={resetTranscript}>Reset</button>
-      <p>{transcript}</p>
-    </div>
+    <span>
+    {listening ? <button onClick={()=>{
+        setData(transcript)
+        SpeechRecognition.stopListening()
+      }}><MdMicOff style={{fontSize: "25px"}}/></button> : 
+      <button onClick={SpeechRecognition.startListening}><MdMic style={{fontSize: "20px"}} /></button>
+      }
+    </span>
   );
 };
 export default Audio;
