@@ -1,16 +1,18 @@
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../utils/errorHandler.js";
-const Medicine = require("../models/medicine");
+import Medicine from "../models/medicine.js";
+import Generic from "../models/genric.js";
 const ADULT_DOSE = 500;
-export const createMedication = catchAsyncError(async (req, res, next) => {
+export const GetDetailsController = catchAsyncError(async (req, res, next) => {
     try {
         const { name, weight, age } = req.body;
         if(name && weight && age){
         Medicine.findOne({Genric: name}, function (err, Medi){
             if(Medi) {
-                age = ParseInt(age);
-                if(Medi.dose) dosage = (age/(age+12))*Medi.dose;
-                else dosage = (age/(age+12))*ADULT_DOSE;
+                var nage = parseInt(age);
+                var dosage = 0;
+                if(Medi.dose) dosage = (nage/(nage+12))*Medi.dose;
+                else dosage = (nage/(nage+12))*ADULT_DOSE;
                 res.status(200).json({details: Medi, dosage: dosage});
             }
             else{
@@ -22,9 +24,11 @@ export const createMedication = catchAsyncError(async (req, res, next) => {
         })
     }
         else res.status(400).json({ message: "Please fill all details" })
-        console.log(rxnorm, generic, brand);
+
     }
     catch (err) {
-        res.status(400).json({ msg: err })
+        res.status(400).json({ message: "Err" })
+        console.log(err)
+        
     }
 });
