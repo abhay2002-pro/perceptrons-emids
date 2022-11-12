@@ -1,7 +1,10 @@
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../utils/errorHandler.js";
-const Medicine = require("../models/medicine");
-const Generic = require("../models/genric");
+import Medicine from "../models/medicine.js";
+import Generic from "../models/genric.js";
+
+// const Medicine = require("../models/medicine.js");
+// const Generic = require("../models/genric.js");
 export const createMedication = catchAsyncError(async (req, res, next) => {
     try {
         const { rxnorm, generic, name, brand, route, dosage, frequency, additional } = req.body;

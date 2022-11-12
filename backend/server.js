@@ -1,6 +1,5 @@
 import app from "./app.js";
 import { connectDB } from "./database/database.js";
-
 connectDB()
   .then((connection) => {
     console.log(`MongoDB connected with ${connection.host}`);

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import {mongoose} from 'mongoose';
 const MedicineSchema = new mongoose.Schema({
     RxNORM:{
         type: String,
@@ -11,5 +11,6 @@ const MedicineSchema = new mongoose.Schema({
     
 })
 
-const User = mongoose.model('Genric',MedicineSchema);
-module.exports = User;
+const Generic = mongoose.model('Generic',MedicineSchema);
+// module.exports = Generic;
+export default Generic;

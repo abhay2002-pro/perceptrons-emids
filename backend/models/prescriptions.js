@@ -1,26 +1,38 @@
-const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema({
-    name:{
+import {mongoose} from 'mongoose';
+const MedicineSchema = new mongoose.Schema({
+    RxNORM:{
         type: String,
         required: true,
     },
-    email:{
+    Genric:{
         type: String,
         required: true,
     },
-    password:{
+    FullName:{
         type: String,
         required: true,
     },
-    mobileno:{
+    BrandName:{
+        type: String,
+        required: true,
+    },
+    route:{
+        type: String,
+        required: true,
+    },
+    dosage:{
+        type: String,
+        required: true,
+    },
+    frequency:{
         type: Number,
         required: true,
     },
-    verified:{
-        type:Boolean,
-        default: false,
-    }
+    Additional:{
+        type: String,
+        required: true,
+    },
 })
 
-const User = mongoose.model('User',userSchema);
-module.exports = User;
+const Pres = mongoose.model('Pres',MedicineSchema);
+export default  Pres;
