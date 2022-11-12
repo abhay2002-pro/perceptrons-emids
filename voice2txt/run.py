@@ -25,4 +25,4 @@ def read_create_wav(path):
     return "input.wav"
 
 if __name__ == "__main__":
-    main("download.wav")
+    main("audio.wav")
