@@ -27,8 +27,12 @@ import URL from '../../BASE_URL';
     useEffect(() => {
       const loadMedicines = async () => {
         const response = await axios.get("api/v1/genric");
-        console.log(response);
-        setMedicines(response.GenricName);
+        var arr = [];
+        for( var i = 0; i<response.data.GenricName.length;i++){
+          if(response.data.GenricName[i].Genric) arr.push(response.data.GenricName[i].Genric);
+        }
+        
+        setMedicines(arr);
       }
       loadMedicines();
     }, [])
@@ -40,12 +44,15 @@ import URL from '../../BASE_URL';
           const regex = new RegExp(`${code}`, "gi");
           return med.rxnorm.match(regex);
         })
+        console.log(code, matches);
       }
       setSuggestions(matches)
       setRxnorm(code)
     }
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+      const response = await axios.post("api/v1/getdetails");
+      setFrequency(response.Frequency);
       e.preventDefault()
     }
     return (
@@ -63,12 +70,14 @@ import URL from '../../BASE_URL';
                 placeholder="parac"
                 type="text"
                 value={rxnorm}
-                onChange={e => rxnormOnChangeHandler(e.target.value)}
+                onChange={e => {
+                  setRxnorm(e.target.value);
+                  rxnormOnChangeHandler(e.target.value);
+                }}
                 focusBorderColor="#16a085"
               />
               {suggestions && suggestions.map((suggestion, i) => {
-                return 
-                <div key={i} className="suggestions" onClick={e => {
+                return <div key={i} className="suggestions" onClick={e => {
                   setRxnorm(e.target.value);
                   setSuggestions([]);
                 }}>
