@@ -27,7 +27,7 @@ const pharmas = ["Sun Pharmaceutical", "Cipla", "ManKind", "Manforce" ,"WELCURE 
 
     useEffect(() => {
       const loadMedicines = async () => {
-        const response = await axios.get("api/v1/genric");
+        const response = await axios.get("http://localhost:4000/api/v1/genric");
         var arr = [];
         for( var i = 0; i<response.data.GenricName.length;i++){
           if(response.data.GenricName[i].Genric) arr.push(response.data.GenricName[i].Genric);
@@ -52,7 +52,7 @@ const pharmas = ["Sun Pharmaceutical", "Cipla", "ManKind", "Manforce" ,"WELCURE 
     }
     
     const handleSubmit = async (name) => {
-      const response = await axios.post("api/v1/getdetails",{ 
+      const response = await axios.post("http://localhost:4000/api/v1/getdetails",{ 
         name :name ,
          weight : 50,
           age : 40,
@@ -62,12 +62,12 @@ const pharmas = ["Sun Pharmaceutical", "Cipla", "ManKind", "Manforce" ,"WELCURE 
       setFrequency(response.data.details.frequency);
       setAddinfo(response.data.details.Additional);
       if(parseInt(response.data.dosage) > 100){
-        var num = parseInt(parseInt(response.data.dosage)/100);
+        let num = parseInt(parseInt(response.data.dosage)/100);
         num = num*100;
         setDosage(num + " " + response.data.details.unit)
       }
       else{
-        var num = parseInt(parseInt(response.data.dosage)/10);
+        let num = parseInt(parseInt(response.data.dosage)/10);
         num = num*10;
         setDosage(num + " " + response.data.details.unit)
       }
@@ -83,6 +83,11 @@ const pharmas = ["Sun Pharmaceutical", "Cipla", "ManKind", "Manforce" ,"WELCURE 
       <Container minH={'95vh'} maxW="container.lg" paddingY="8">
         <VStack h="full" justifyContent="center" spacing="16">
           <Heading children="Add New Prescription" m={'2'} />
+          <div className="age-flex">
+
+          <p className="age-p">Age : 40</p>
+          <p className="age-p">Weight : 50</p>
+          </div>
           <form style={{ width: '100%' }} onSubmit={handleSubmit}>
             <FormControl my="1">
               <FormLabel htmlFor="rxnorm">

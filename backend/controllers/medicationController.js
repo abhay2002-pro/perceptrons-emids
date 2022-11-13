@@ -23,7 +23,6 @@ export const createMedication = catchAsyncError(async (req, res, next) => {
             res.status.json({ message: "Medicine added Successfully !" })
         }
         else res.status(400).json({ message: "Please fill all details" })
-        console.log(rxnorm, generic, brand);
     }
     catch (err) {
         res.status(400).json({ msg: err })
