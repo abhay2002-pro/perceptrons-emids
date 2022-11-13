@@ -11,6 +11,8 @@ import {
   import React, {useState, useEffect} from 'react';
   import Audio from "../Audio"
   import axios from 'axios'
+import URL from '../../BASE_URL';
+const pharmas = ["Sun Pharmaceutical", "Cipla", "ManKind", "Manforce" ,"WELCURE REMEDIES" , "ABBOTT INDIA",  "AUROBINDO PHARMA" ,"AUROBINDO PHARMA"]
   function Request() {
     const [generic, setGeneric] = useState("");
     const [fname, setFname] = useState("");
@@ -70,7 +72,8 @@ import {
         setDosage(num + " " + response.data.details.unit)
       }
       // setDosage((parseInt(response.data.dosage)) + response.data.details.unit);
-      setBrand("Cipla");
+      let x = Math.random() * 8;
+      setBrand(pharmas[x]);
       setFname(response.data.details.FullName)
       setGeneric(name);
       setRoute(response.data.details.route);
@@ -80,6 +83,11 @@ import {
       <Container minH={'95vh'} maxW="container.lg" paddingY="8">
         <VStack h="full" justifyContent="center" spacing="16">
           <Heading children="Add New Prescription" m={'2'} />
+          <div className="age-flex">
+
+          <p className="age-p">Age : 40</p>
+          <p className="age-p">Weight : 50</p>
+          </div>
           <form style={{ width: '100%' }} onSubmit={handleSubmit}>
             <FormControl my="1">
               <FormLabel htmlFor="rxnorm">

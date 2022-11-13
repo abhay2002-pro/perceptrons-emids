@@ -1,6 +1,19 @@
 This is the codebase of our submission to Emids Healthcare hackathon 
 
-## How to run?
+## ⚙️Team 
+Team Perceptrons
+
+## 🧑‍🔬Problem Statement
+Handwritten prescriptions are prone to medication errors. Electronic prescriptions solve this problem but data entry in EMR software consumes significant amount of time and efforts.
+
+## 😎Features
+
+ - AI based voice to text
+ - Auto Completion
+ - Fuzzy Logic based Prescription helper
+ - User Friendly UI
+
+## 💻How to run?
 
 ## Pull the repo to your local sytem.
 ### `git pull`
@@ -17,9 +30,13 @@ Create a file named config.env in route folder and paste the following two thing
 PORT=4000
 MONGO_URI = mongodb://localhost:27017/perceptrons
 
-## Run Backend
+## 🏃‍♂️Run Backend
 In the backend folder, run 
-### `npm start`
+### `npm run start`
+
+
+## 🤔Set up vioce2txt API 
+refer voice2text/HowToUse.tst
 
 -> Set up Database
 Open Mongo Compass and go to perceptrons database, 
@@ -28,6 +45,6 @@ Open Mongo Compass and go to perceptrons database,
 Chose the file and upload it.
 
 
-## Run frontend
+## 🏃‍♂️Run frontend
 In the frontend folder, run
 ## `npm start`

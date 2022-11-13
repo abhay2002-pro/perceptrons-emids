@@ -12,3 +12,15 @@
 .suggestions:hover{
   color:#16a085;
 }
+.age-p{
+  margin: 1rem !important;
+  font-size: 1.25rem;
+  text-align: left;
+  
+}
+.age-flex{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: row;
+}
