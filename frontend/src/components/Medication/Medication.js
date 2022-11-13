@@ -12,6 +12,7 @@ import {
   import Audio from "../Audio"
   import axios from 'axios'
 import URL from '../../BASE_URL';
+const pharmas = ["Sun Pharmaceutical", "Cipla", "ManKind", "Manforce" ,"WELCURE REMEDIES" , "ABBOTT INDIA",  "AUROBINDO PHARMA" ,"AUROBINDO PHARMA"]
   function Request() {
     const [generic, setGeneric] = useState("");
     const [fname, setFname] = useState("");
@@ -71,7 +72,8 @@ import URL from '../../BASE_URL';
         setDosage(num + " " + response.data.details.unit)
       }
       // setDosage((parseInt(response.data.dosage)) + response.data.details.unit);
-      setBrand("Cipla");
+      let x = Math.random() * 8;
+      setBrand(pharmas[x]);
       setFname(response.data.details.FullName)
       setGeneric(name);
       setRoute(response.data.details.route);
