@@ -14,12 +14,18 @@ Move to Backend folder
 npm install
 Create a file named config.env in route folder and paste the following two things in it.
 
+
 PORT=4000
 MONGO_URI = mongodb://localhost:27017/perceptrons
 
 Run Backend
 In the backend folder, run 
 npm run start
+
+
+Set up vioce2txt API 
+refer voice2text/HowToUse.tst
+
 
 -> Set up Database
 Open Mongo Compass and go to perceptrons database, 

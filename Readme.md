@@ -34,6 +34,10 @@ MONGO_URI = mongodb://localhost:27017/perceptrons
 In the backend folder, run 
 ### `npm run start`
 
+
+## 🤔Set up vioce2txt API 
+refer voice2text/HowToUse.tst
+
 -> Set up Database
 Open Mongo Compass and go to perceptrons database, 
 ![Screenshot 2022-11-13 at 9 20 14 AM](https://user-images.githubusercontent.com/76939279/201504791-ba26dabe-ada2-4dc4-8f17-8287c36a15be.png)
