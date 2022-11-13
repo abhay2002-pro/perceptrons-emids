@@ -11,7 +11,6 @@ import {
   import React, {useState, useEffect} from 'react';
   import Audio from "../Audio"
   import axios from 'axios'
-import URL from '../../BASE_URL';
   function Request() {
     const [generic, setGeneric] = useState("");
     const [fname, setFname] = useState("");
@@ -26,7 +25,7 @@ import URL from '../../BASE_URL';
 
     useEffect(() => {
       const loadMedicines = async () => {
-        const response = await axios.get("api/v1/genric");
+        const response = await axios.get("http://localhost:4000/api/v1/genric");
         var arr = [];
         for( var i = 0; i<response.data.GenricName.length;i++){
           if(response.data.GenricName[i].Genric) arr.push(response.data.GenricName[i].Genric);
@@ -51,7 +50,7 @@ import URL from '../../BASE_URL';
     }
     
     const handleSubmit = async (name) => {
-      const response = await axios.post("api/v1/getdetails",{ 
+      const response = await axios.post("http://localhost:4000/api/v1/getdetails",{ 
         name :name ,
          weight : 50,
           age : 40,
@@ -61,12 +60,12 @@ import URL from '../../BASE_URL';
       setFrequency(response.data.details.frequency);
       setAddinfo(response.data.details.Additional);
       if(parseInt(response.data.dosage) > 100){
-        var num = parseInt(parseInt(response.data.dosage)/100);
+        let num = parseInt(parseInt(response.data.dosage)/100);
         num = num*100;
         setDosage(num + " " + response.data.details.unit)
       }
       else{
-        var num = parseInt(parseInt(response.data.dosage)/10);
+        let num = parseInt(parseInt(response.data.dosage)/10);
         num = num*10;
         setDosage(num + " " + response.data.details.unit)
       }
